@@ -20,4 +20,15 @@ const addUser = (req, res) => {
   }
 };
 
-module.exports = { addUser, getUser };
+const login = (req, res) => {
+  const { email, pass } = req.body;
+  User.findOne({ where: { email } }).then((user) => {
+    if (!user) return res.status(401).send("email NO registrador");
+
+    user.validatePass(pass).then((isValid) => {
+      if (!isValid) return res.status(401).send("email NO registrador");
+    });
+  });
+};
+
+module.exports = { addUser, getUser, login };
