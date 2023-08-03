@@ -1,11 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const axios = require("axios");
+const controllersUser = require("../controllers/User");
 
-//45487d7530b9a32f1234012f8cb58526
+router.get("/user/:id", controllersUser.getUser);
 
-router.get("/api/peliculas", (req, res) => {
-  res.send("estamos en la ruta /peliculas");
+router.post("/user", controllersUser.addUser);
+
+/* router.get("/user", (req, res) => {
+  User.findAll().then((res) => res.send(res));
 });
+
+
+
+router.delete("/user/:id", (req, res) => {
+  const { id } = req.params;
+ 
+  User.destroy({ where: { id } }).then((resp) => res.send("User deleted"));
+});
+ */
 
 module.exports = router;
