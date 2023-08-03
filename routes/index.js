@@ -6,6 +6,8 @@ router.get("/user/:id", controllersUser.getUser);
 
 router.post("/user", controllersUser.addUser);
 
+router.post("/user/login", controllersUser.login);
+
 /* router.get("/user", (req, res) => {
   User.findAll().then((res) => res.send(res));
 });
