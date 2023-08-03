@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const router = require("./routes");
+const cookieParser = require("cookie-parser");
+
 const db = require("./models/_db");
 
 require("dotenv").config();
@@ -10,6 +12,7 @@ const port = process.env.PORT || 3000;
 app.set("port", port);
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", router);
