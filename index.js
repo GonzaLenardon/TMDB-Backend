@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const router = require("./routes");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const db = require("./models/_db");
 
@@ -10,6 +11,14 @@ require("dotenv").config();
 const port = process.env.PORT || 3000;
 
 app.set("port", port);
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
