@@ -11,7 +11,7 @@ const addUser = (req, res) => {
   try {
     User.findOne({ where: { email } }).then((exist) => {
       if (exist) {
-        res.status(404).send("el usuario ya esta registrado");
+        res.sendStatus(401);
       } else {
         User.create(req.body).then((user) => res.status(201).send(user));
       }
@@ -24,11 +24,11 @@ const addUser = (req, res) => {
 const login = (req, res) => {
   const { email, pass } = req.body;
   User.findOne({ where: { email } }).then((user) => {
-    if (!user)
-      return res.status(401).send(`la cuenta  ${email} no esta registrador`);
+    if (!user) return res.status(401).send({ respuesta: `wrong email` });
 
     user.validatePass(pass).then((isValid) => {
-      if (!isValid) return res.status(401).send("wrong password");
+      if (!isValid)
+        return res.status(401).send({ respuesta: `wrong password` });
 
       const payload = {
         name: user.name,
@@ -44,12 +44,15 @@ const login = (req, res) => {
 
 const getUser = (req, res) => {
   const token = req.cookies.Token;
+
+  console.log("tokkkkkkkkeenenenenene", token);
+
   if (!token) return res.status(401).send("Session expirada");
 
   const { user } = validateToken(token);
   if (!user) return res.status(401);
 
-  res.send(user);
+  res.status(201).send(user);
 };
 
 module.exports = { addUser, getUser, login };
