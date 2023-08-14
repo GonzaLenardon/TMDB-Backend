@@ -24,11 +24,10 @@ const addUser = (req, res) => {
 const login = (req, res) => {
   const { email, pass } = req.body;
   User.findOne({ where: { email } }).then((user) => {
-    if (!user) return res.status(401).send({ respuesta: `wrong email` });
+    if (!user) return res.sendStatus(401);
 
     user.validatePass(pass).then((isValid) => {
-      if (!isValid)
-        return res.status(401).send({ respuesta: `wrong password` });
+      if (!isValid) return res.sendStatus(401);
 
       const payload = {
         name: user.name,
@@ -44,8 +43,6 @@ const login = (req, res) => {
 
 const getUser = (req, res) => {
   const token = req.cookies.Token;
-
-  console.log("tokkkkkkkkeenenenenene", token);
 
   if (!token) return res.status(401).send("Session expirada");
 
