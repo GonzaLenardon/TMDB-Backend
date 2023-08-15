@@ -41,6 +41,11 @@ const login = (req, res) => {
   });
 };
 
+const logout = (req, res) => {
+  res.clearCookie("Token");
+  res.sendStatus(204);
+};
+
 const getUser = (req, res) => {
   const token = req.cookies.Token;
 
@@ -52,4 +57,4 @@ const getUser = (req, res) => {
   res.status(201).send(user);
 };
 
-module.exports = { addUser, getUser, login };
+module.exports = { addUser, getUser, login, logout };
