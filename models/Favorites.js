@@ -5,7 +5,7 @@ class Favorites extends sq.Model {}
 
 Favorites.init(
   {
-    idMovie: { type: sq.INTEGER },
+    Movie: { type: sq.INTEGER },
   },
   { sequelize: db, modelName: "favorites" }
 );
