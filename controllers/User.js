@@ -1,9 +1,9 @@
 const { User } = require("../models");
 const { generateToken, validateToken } = require("../config/token");
 
-const UserId = (req, res) => {
-  const { id } = req.params;
-  User.findOne({ where: { id } }).then((user) => res.status(200).send(user));
+const gerUser = (req, res) => {
+  const email = req.params.email;
+  User.findOne({ where: { email } }).then((user) => res.status(200).send(user));
 };
 
 const addUser = (req, res) => {
