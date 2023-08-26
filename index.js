@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", router);
 
-db.sync({ force: false })
+db.sync({ force: true })
 
   .then(() => {
     app.listen(app.get("port"), () =>

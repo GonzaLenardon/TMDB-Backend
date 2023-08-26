@@ -7,6 +7,7 @@ Favorites.init(
   {
     Movie: { type: sq.INTEGER },
   },
+
   { sequelize: db, modelName: "favorites" }
 );
 
