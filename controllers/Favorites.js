@@ -13,18 +13,36 @@ const addFavorite = (req, res) => {
           Favorites.create({ Movie })
             .then((favorite) => {
               favorite.setUser(user);
-              res.send(201);
+              res.sendStatus(201);
               //res.status(201).send(favorite);
               console.log("agregamos favoritos");
             })
             .catch((erro) => console.log("Dio un errorororor", erro));
         } else {
-          res.send(204);
+          res.sendStatus(204);
           console.log("ya existe este movie en favoritos");
         }
       });
     }
   });
+};
+
+const removeFavorite = (req, res) => {
+  const { email } = req.body;
+  const idMovie = req.params.id;
+
+  try {
+    User.findOne({ where: { email } }).then((user) => {
+      if (user) {
+        Favorites.findOne({ where: { Movie: idMovie } }).then((removeMovie) => {
+          removeMovie.destroy();
+          res.sendStatus(201);
+        });
+      }
+    });
+  } catch (error) {
+    res.sendStatus(401);
+  }
 };
 
 const allFavorites = (req, res) => {
@@ -42,4 +60,4 @@ const allFavorites = (req, res) => {
     .catch((error) => console.log(error));
 };
 
-module.exports = { addFavorite, allFavorites };
+module.exports = { addFavorite, removeFavorite, allFavorites };
