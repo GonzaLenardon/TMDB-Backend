@@ -9,6 +9,8 @@ router.post("/user/logout", controllersUser.logout);
 router.get("/user/me", controllersUser.getUser);
 
 router.post("/favorites/:id", controllerFavorites.addFavorite);
+router.delete("/favorites/remove/:id", controllerFavorites.removeFavorite);
+
 router.get("/favorites/all/:email", controllerFavorites.allFavorites);
 
 module.exports = router;
