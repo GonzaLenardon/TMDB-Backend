@@ -14,7 +14,9 @@ app.set("port", port);
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    /*     origin: "http://localhost:5173",
+     */
+    origin: "https://tmdb-xi-seven.vercel.app",
     methods: ["GET", "POST", "DELETE", "OPTIONS"],
     credentials: true,
   })
@@ -26,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", router);
 
-db.sync({ force: false })
+db.sync({ force: true })
 
   .then(() => {
     app.listen(app.get("port"), () =>
