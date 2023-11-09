@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User } = require("../db/models");
 const { generateToken, validateToken } = require("../config/token");
 
 const gerUser = (req, res) => {

@@ -1,4 +1,4 @@
-const { Favorites, User } = require("../models");
+const { Favorites, User } = require("../db/models");
 
 const addFavorite = (req, res) => {
   const { email } = req.body;
